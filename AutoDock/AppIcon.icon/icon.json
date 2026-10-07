@@ -1,0 +1,31 @@
+{
+  "fill": {
+    "linear-gradient": [
+      "srgb:0.02000,0.65000,1.00000,1.00000",
+      "srgb:0.40000,0.22000,1.00000,1.00000"
+    ]
+  },
+  "groups": [
+    {
+      "layers": [
+        {
+          "image-name": "AutoDock.png",
+          "name": "AutoDock",
+          "glass": false
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0
+      },
+      "specular": false,
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      }
+    }
+  ],
+  "supported-platforms": {
+    "squares": "shared"
+  }
+}
