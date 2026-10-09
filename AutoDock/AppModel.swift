@@ -7,6 +7,7 @@ enum ManagementTab: Hashable {
     case rules
     case settings
     case diagnostics
+    case about
 }
 
 @MainActor
