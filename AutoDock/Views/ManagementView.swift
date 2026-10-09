@@ -46,6 +46,9 @@ struct ManagementView: View {
                 DiagnosticsView(model: model)
                     .tabItem { Label("诊断", systemImage: "doc.text") }
                     .tag(ManagementTab.diagnostics)
+                AboutView()
+                    .tabItem { Label("关于", systemImage: "info.circle") }
+                    .tag(ManagementTab.about)
             }
             .padding(.horizontal, 12)
         }
