@@ -1,162 +1,167 @@
 <p align='center'>
-  <img src='AutoDock/Assets.xcassets/AppIcon.appiconset/icon_128x128.png' width='96' height='96' alt='AutoDock 图标'>
+  <img src='AutoDock/Assets.xcassets/AppIcon.appiconset/icon_128x128.png' width='96' height='96' alt='AutoDock icon'>
 </p>
 
 <h1 align='center'>AutoDock</h1>
 
 <p align='center'>
-  根据外接显示器，自动切换 macOS Dock 位置。<br>
-  公司靠右，家里靠左，连接显示器即可切换。
+  English · <a href='README.zh-CN.md'>简体中文</a>
 </p>
 
 <p align='center'>
-  <img src='https://img.shields.io/badge/macOS-13%2B-007AFF' alt='最低系统版本 macOS 13'>
-  <img src='https://img.shields.io/badge/架构-Apple%20Silicon%20%7C%20Intel-555555' alt='Apple Silicon 和 Intel 通用构建'>
-  <a href='LICENSE'><img src='https://img.shields.io/badge/许可证-MIT-34C759' alt='MIT 许可证'></a>
+  Automatically switch the macOS Dock position based on your external display.<br>
+  Right at work, left at home — just connect your display.
 </p>
 
-AutoDock 是一款轻量的 macOS 菜单栏工具。为不同显示器设置一次规则，之后在公司、家中或移动办公环境之间切换时，Dock 会自动调整到左侧、底部或右侧。
+<p align='center'>
+  <img src='https://img.shields.io/badge/macOS-13%2B-007AFF' alt='Requires macOS 13 or later'>
+  <img src='https://img.shields.io/badge/Architecture-Apple%20Silicon%20%7C%20Intel-555555' alt='Universal build for Apple Silicon and Intel'>
+  <a href='LICENSE'><img src='https://img.shields.io/badge/License-MIT-34C759' alt='MIT license'></a>
+</p>
 
-使用 Swift、SwiftUI 和 AppKit 开发，无第三方库依赖。规则保存在本机，无需账号或网络服务。
+AutoDock is a lightweight macOS menu bar utility. Configure a rule for each display once, and the Dock will automatically move to the left, bottom, or right as you switch between your office, home, and other workspaces.
 
-[功能](#功能) · [安装](#安装) · [快速开始](#快速开始) · [规则说明](#规则说明) · [常见问题](#常见问题) · [开发与发布](#开发与发布)
+Built with Swift, SwiftUI, and AppKit, with no third-party library dependencies. Rules stay on your Mac, with no account or network service required.
 
-## 功能
+[Features](#features) · [Installation](#installation) · [Quick Start](#quick-start) · [Rule Behavior](#rule-behavior) · [FAQ](#faq) · [Development and Releases](#development-and-releases)
 
-- **按显示器自动切换**：为外接显示器指定 Dock 位置，响应连接、断开、显示配置变化及睡眠唤醒。
-- **菜单栏操作**：通过勾选查看当前 Dock 位置和生效规则，随时手动切换；显示器详情在“管理规则…”中查看。
-- **多显示器优先级**：同时连接多台显示器时，按规则优先级选择位置。
-- **规则管理**：添加、编辑、删除、启用或禁用规则，支持自定义备注名称。
-- **断开后的行为**：无外接显示器时，可保持当前位置，或切换到左侧、底部、右侧。
-- **登录启动**：通过 macOS 系统登录项启动，显示实际注册及批准状态。
-- **本地诊断**：查看最近日志、导出诊断信息，数据损坏时保留原始内容并暂停自动切换。
+## Features
 
-仅在目标位置与当前位置不同时重新加载 Dock，连续显示器事件会合并处理。
+- **Automatic switching by display**: Assign a Dock position to an external display. AutoDock responds to connections, disconnections, display configuration changes, and wake from sleep.
+- **Menu bar controls**: Checkmarks show the current Dock position and active rule. Switch positions manually at any time, and view display details in Manage Rules.
+- **Multiple display priorities**: When several displays are connected, rule priority determines the Dock position.
+- **Rule management**: Add, edit, delete, enable, or disable rules, with custom display names.
+- **Behavior after disconnection**: When no external display is connected, keep the current position or switch to the left, bottom, or right.
+- **Launch at login**: Use macOS login items to start AutoDock, with registration and approval status shown in the app.
+- **Local diagnostics**: View recent logs and export diagnostic information. If stored data is corrupted, AutoDock preserves the original data and pauses automatic switching.
+- **About page**: View the app version, feature overview, source repository, and license information in the management window.
 
-## 安装
+AutoDock reloads the Dock only when the target position differs from the current position. Consecutive display events are coalesced.
 
-### 系统要求
+## Installation
 
-| 项目 | 要求 |
+### System Requirements
+
+| Item | Requirement |
 | --- | --- |
-| 操作系统 | macOS 13 Ventura 或更新版本 |
-| 处理器 | Apple Silicon 或 Intel，安装包包含两种架构 |
+| Operating system | macOS 13 Ventura or later |
+| Processor | Apple Silicon or Intel; packages include both architectures |
 
-最低部署版本及通用架构已在工程中配置，实机验证范围见[发布状态](#发布状态)。
+The minimum deployment target and universal architectures are configured in the project. See [Release Status](#release-status) for hardware validation coverage.
 
-### 下载安装包
+### Download and Install
 
-1. 打开本仓库的 **Releases**，下载发布版本的 `.dmg` 或 `.zip`。若尚无发布版本，可[从源码运行](#从源码运行)。
-2. 打开 DMG 或解压 ZIP，将 `AutoDock.app` 拖入“应用程序”目录。
-3. 启动 AutoDock，点击菜单栏中的显示器图标开始使用。
+1. Open this repository's [**Releases**](https://github.com/ljt990218/AutoDock/releases) and download a release `.dmg` or `.zip`. If no release is available, [run from source](#run-from-source).
+2. Open the DMG or extract the ZIP, then drag `AutoDock.app` into Applications.
+3. Launch AutoDock and click the display icon in the menu bar.
 
-> 当前安装包使用 ad-hoc 签名，尚未进行 Developer ID 签名和 Apple 公证。首次打开可能被 macOS 安全机制阻止，请参考 [Apple 官方说明](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac)操作，无需关闭系统安全检查。
+> Current packages use ad-hoc signing and have not been signed with a Developer ID or notarized by Apple. macOS may block the first launch. Follow [Apple's official instructions](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac) without disabling system security checks.
 
-更新时先退出旧版本，再替换“应用程序”中的应用并重新启动。若更新后登录启动失效，可关闭后重新开启，并检查系统批准状态。
+To update, quit the old version, replace the app in Applications, and launch it again. If launch at login stops working after an update, turn it off and back on, then check the system approval status.
 
-## 快速开始
+## Quick Start
 
-1. **连接显示器**：接入希望配置的外接显示器。
-2. **添加规则**：点击菜单栏图标 →“管理规则…”→ 对应显示器的“添加规则…”，选择 Dock 位置并保存。
-3. **设置备注**：将规则名称改为“公司显示器”“家里显示器”等，便于识别。
-4. **按需调整**：在“设置…”中选择无外接显示器时的行为，并按需开启“登录时启动”。
+1. **Connect a display**: Connect the external display you want to configure.
+2. **Add a rule**: Click the menu bar icon → Manage Rules → Add Rule for the relevant display, choose a Dock position, and save.
+3. **Name the rule**: Use a name such as Office Display or Home Display to make it easier to identify.
+4. **Adjust settings**: In Settings, choose the behavior when no external display is connected and optionally enable Launch at Login.
 
-例如，可以配置为：
+For example:
 
-| 使用场景 | 配置 | 结果 |
+| Scenario | Configuration | Result |
 | --- | --- | --- |
-| 公司办公 | 公司显示器 → 右侧 | 连接后 Dock 切换到右侧 |
-| 家中办公 | 家里显示器 → 左侧 | 连接后 Dock 切换到左侧 |
-| 仅使用笔记本 | 无外接显示器 → 底部 | 断开所有外接显示器后，Dock 切换到底部 |
+| Office | Office Display → Right | Dock moves to the right when connected |
+| Home | Home Display → Left | Dock moves to the left when connected |
+| Laptop only | No external display → Bottom | Dock moves to the bottom after all external displays disconnect |
 
-默认开启自动监听、关闭登录启动，无外接显示器时保持当前位置。首次连接显示器不会自动创建规则。
+Automatic monitoring is enabled by default, launch at login is disabled, and the Dock keeps its current position when no external display is connected. Connecting a display for the first time does not create a rule automatically.
 
-开启登录启动后，若显示等待系统批准，在管理窗口的“设置”页点击“打开系统登录项设置…”，在 macOS 中允许该登录项。
+If launch at login is waiting for system approval, click Open System Login Item Settings on the Settings tab in the management window, then allow the login item in macOS.
 
-## 规则说明
+## Rule Behavior
 
-| 情况 | 处理方式 |
+| Situation | Behavior |
 | --- | --- |
-| 一条启用的规则命中 | 应用该规则的 Dock 位置 |
-| 多条启用的规则命中 | 应用优先级最高的规则，数值越大优先级越高 |
-| 最高优先级并列 | 保持当前位置并提示冲突，即使目标位置相同也不自动应用 |
-| 外接显示器均未命中规则 | 保持当前位置 |
-| 已配置与未配置的显示器同时连接 | 仍应用已配置显示器的规则 |
-| 没有外接显示器 | 按“无外接显示器时”的设置处理 |
-| 关闭自动监听 | 停止自动应用规则，仍可手动切换 |
+| One enabled rule matches | Apply that rule's Dock position |
+| Multiple enabled rules match | Apply the rule with the highest priority; larger values mean higher priority |
+| Multiple rules share the highest priority | Keep the current position and report a conflict, even if the target positions are identical |
+| No external display matches a rule | Keep the current position |
+| Configured and unconfigured displays are connected together | Apply the configured display's rule |
+| No external display is connected | Use the configured behavior for no external display |
+| Automatic monitoring is disabled | Stop applying rules automatically; manual switching remains available |
 
-新规则的默认优先级为 `0`。同时连接多台已配置显示器时，请为希望生效的规则设置更高优先级。
+New rules have a default priority of `0`. When several configured displays are connected, give the rule you want to apply a higher priority.
 
-“快速切换”是临时手动操作。AutoDock 不持续覆盖手动更改，下次显示器变化或修改自动规则时会重新匹配。关闭管理窗口后应用继续在菜单栏运行，使用“退出 AutoDock”结束运行，退出时保留当前 Dock 位置。
+Quick Switch is a temporary manual action. AutoDock does not continuously override manual changes. It matches rules again on the next display change or automatic rule update. Closing the management window leaves the app running in the menu bar. Use Quit AutoDock to exit; the current Dock position is preserved.
 
-### 显示器识别
+### Display Identification
 
-显示器身份按以下顺序确定：
+Display identity is determined in this order:
 
-1. 有效厂商 ID + 型号 ID + 硬件序列号
+1. Valid vendor ID + model ID + hardware serial number
 2. Display UUID
-3. 有效厂商 ID + 型号 ID + 真实系统名称
+3. Valid vendor ID + model ID + actual system name
 
-规则与当前显示器分别生成匹配键后进行比较。已有强身份规则不会在强身份暂时缺失时自动降级为名称匹配。自定义备注只用于显示，不影响身份匹配。
+Rules and connected displays each generate a matching key for comparison. An existing rule with a strong identity does not automatically fall back to name matching when that identity is temporarily unavailable. Custom names are for display only and do not affect identity matching.
 
-- 更换 Hub、端口、连接方式或 DisplayLink 驱动可能改变 UUID，需要重新创建规则。
-- 缺少序列号和 UUID 时，厂商、型号与名称组合无法可靠区分两台同型号显示器。
-- 镜像输出可能无法取得真实名称，仍会尝试使用序列号或 UUID。
-- 不同输出提供相同身份且命中规则时，保持当前位置并提示识别限制。
+- Changing a hub, port, connection type, or DisplayLink driver may change the UUID and require a new rule.
+- Without a serial number or UUID, the vendor, model, and name combination cannot reliably distinguish two displays of the same model.
+- Mirrored displays may not provide an actual system name. AutoDock still attempts to use the serial number or UUID.
+- If different display outputs provide the same identity and match a rule, AutoDock keeps the current position and reports the identification limitation.
 
-完整字段与匹配规则见[字段映射文档](docs/FIELD_MAPPING.md)。
+See the [Field Mapping documentation](docs/FIELD_MAPPING.md) for the complete fields and matching rules.
 
-## 隐私与权限
+## Privacy and Permissions
 
-- 规则和设置仅保存在当前 Mac 用户的本地偏好中，不使用账号、云同步或网络服务。
-- 不请求辅助功能、屏幕录制或定位权限。登录启动由 macOS 系统登录项管理。
-- 只修改 Dock 的 `orientation` 偏好，并重新加载 Dock。不修改分辨率、亮度、显示器排列或其他 Dock 设置。
-- 诊断导出可能包含显示器序列号、UUID、用户备注和原始本地数据，分享前请检查并移除敏感信息。
+- Rules and settings are stored only in the current Mac user's local preferences. AutoDock uses no account, cloud sync, or network service.
+- No Accessibility, Screen Recording, or Location permission is requested. Launch at login is managed through macOS login items.
+- AutoDock only changes the Dock's `orientation` preference and reloads the Dock. It does not change resolution, brightness, display arrangement, or other Dock settings.
+- Diagnostic exports may contain display serial numbers, UUIDs, custom names, and original local data. Review and remove sensitive information before sharing.
 
-## 常见问题
+## FAQ
 
-### 为什么没有主窗口或 Dock 图标？
+### Why is there no main window or Dock icon?
 
-AutoDock 是菜单栏应用，启动后点击顶部菜单栏的显示器图标即可操作。“管理规则…”和“设置…”会打开管理窗口。显示器详情及全部规则在“规则”页查看，登录启动在“设置”页调整，诊断信息在“诊断”页查看和导出。
+AutoDock is a menu bar app. After launching it, click the display icon in the top menu bar. Manage Rules and Settings open the management window. The Rules tab shows display details and all rules, Settings controls launch at login, Diagnostics lets you view and export diagnostic information, and About shows the app version and open-source project information.
 
-### 为什么连接显示器后没有切换？
+### Why does the Dock stay in place after I connect a display?
 
-确认“自动监听”已开启，显示器已有启用的规则，且最高优先级没有并列。若目标位置与当前位置相同，应用不会重新加载 Dock。菜单仅显示当前生效规则及错误提示；完整状态可悬停菜单栏图标查看，或打开管理窗口查看。
+Make sure automatic monitoring is enabled, the display has an enabled rule, and no rules share the highest priority. If the target position matches the current position, AutoDock does not reload the Dock. The menu shows the active rule and error messages. Hover over the menu bar icon or open the management window for the full status.
 
-显示器扫描失败时，不会将其视为“没有外接显示器”。执行失败后，可点击“重试”，或在“诊断”页查看日志。
+A failed display scan is not treated as having no external display connected. If an operation fails, click Retry or check the logs on the Diagnostics tab.
 
-### 能否指定 Dock 出现在哪台显示器上？
+### Can I choose which display shows the Dock?
 
-AutoDock 只设置 macOS 定义的左侧、底部或右侧方向，不保证改变 Dock 所在的具体显示器。
+AutoDock only sets the left, bottom, or right orientation defined by macOS. It does not guarantee which display the Dock appears on.
 
-### 为什么更换连接方式后规则失效？
+### Why does a rule stop working after I change the connection?
 
-显示器的 UUID 可能随端口、Hub 或驱动变化。请查看[显示器识别](#显示器识别)，并为当前连接重新创建规则。
+A display's UUID may change with the port, hub, or driver. See [Display Identification](#display-identification) and create a new rule for the current connection.
 
-### 如何处理本地数据损坏？
+### How do I recover from corrupted local data?
 
-无法解码本地数据时，AutoDock 会暂停自动切换并保留原始内容。先导出诊断备份，再在“设置…”中重置本地规则和设置。重置不会改变系统登录项注册状态。
+If local data cannot be decoded, AutoDock pauses automatic switching and preserves the original content. Export a diagnostic backup first, then reset local rules and settings in Settings. Resetting does not change the system login item registration status.
 
-## 开发与发布
+## Development and Releases
 
-### 从源码运行
+### Run from Source
 
-1. 安装支持 macOS 13 的 Xcode。
-2. 下载或克隆本仓库，打开 `AutoDock.xcodeproj`。
-3. 选择共享 Scheme **AutoDock**，运行目标选择本机 Mac。
-4. 在 Xcode 中运行，应用图标将出现在菜单栏。
+1. Install an Xcode version that supports macOS 13.
+2. Download or clone this repository and open `AutoDock.xcodeproj`.
+3. Select the shared **AutoDock** scheme and your local Mac as the run destination.
+4. Run from Xcode. The app icon will appear in the menu bar.
 
-工程默认采用 ad-hoc 签名，无需 Developer ID 证书，未启用 App Sandbox。Bundle ID 为 `com.autodock.AutoDock`，规则通过该应用的 UserDefaults 保存，发布版本应保持此标识不变。
+The project uses ad-hoc signing by default, requires no Developer ID certificate, and does not enable App Sandbox. The bundle ID is `com.autodock.AutoDock`, and rules are stored in the app's UserDefaults. Keep this identifier unchanged for releases.
 
-### 打包安装包
+### Build Packages
 
-本地打包入口：
+To package locally:
 
 ```bash
 bash scripts/package.sh 1.0.0
 ```
 
-默认输出到 `dist/`：
+By default, output is written to `dist/`:
 
 ```text
 AutoDock-1.0.0-universal.dmg
@@ -164,69 +169,69 @@ AutoDock-1.0.0-universal.zip
 AutoDock-1.0.0-SHA256SUMS.txt
 ```
 
-可通过 `AUTODOCK_OUTPUT_DIR` 指定输出目录，通过 `AUTODOCK_BUILD_NUMBER` 指定整数构建号。脚本构建通用二进制并生成安装包，不启动应用，也不修改打包机器的 Dock 偏好。
+Set `AUTODOCK_OUTPUT_DIR` to choose an output directory and `AUTODOCK_BUILD_NUMBER` to specify an integer build number. The script builds a universal binary and generates packages. It does not launch the app or change the packaging machine's Dock preferences.
 
-### GitHub Actions 发布流程
+### GitHub Actions Release Workflow
 
-仓库提供[手动打包工作流](.github/workflows/package.yml)：
+The repository includes a [manual packaging workflow](.github/workflows/package.yml):
 
-1. 在 **Actions** 中选择 **Package AutoDock**，点击 **Run workflow**。
-2. 选择分支或标签，填写三段数字版本号，例如 `1.0.0`。
-3. 工作流完成后下载产物，包含 DMG、ZIP 和 SHA-256 校验文件。
-4. 完成发布验收后，创建对应版本的 GitHub Release，上传安装包及校验文件。
+1. In **Actions**, select **Package AutoDock** and click **Run workflow**.
+2. Select a branch or tag and enter a three-part numeric version, such as `1.0.0`.
+3. When the workflow finishes, download the artifacts containing the DMG, ZIP, and SHA-256 checksum file.
+4. After completing release acceptance checks, create a GitHub Release for that version and upload the packages and checksum file.
 
-工作流仅手动触发，不执行测试，也不会自动创建 Release。产物保留 14 天。
+The workflow runs only when triggered manually. It does not run tests or create a Release automatically. Artifacts are retained for 14 days.
 
-### 项目结构
+### Project Structure
 
 ```text
-AutoDock.xcodeproj/       Xcode 工程和共享 Scheme
+AutoDock.xcodeproj/       Xcode project and shared scheme
 AutoDock/
-  AutoDockApp.swift       应用入口
-  AppDelegate.swift      菜单栏和窗口生命周期
-  AppModel.swift         应用状态与自动切换协调
-  Models/                显示器身份、规则和设置
-  Services/              显示器监听、规则匹配、Dock 操作、存储和登录项
-  Views/                 原生菜单和 SwiftUI 管理界面
-  Utilities/             日志
-AutoDockTests/           核心逻辑单元测试
-docs/                    字段映射和历史测试记录
-scripts/package.sh       通用安装包脚本
-.github/workflows/       手动打包工作流
+  AutoDockApp.swift       App entry point
+  AppDelegate.swift      Menu bar and window lifecycle
+  AppModel.swift         App state and automatic switching coordination
+  Models/                Display identities, rules, and settings
+  Services/              Display monitoring, rule matching, Dock operations, storage, and login items
+  Views/                 Native menus and SwiftUI management interface
+  Utilities/             Logging
+AutoDockTests/           Core logic unit tests
+docs/                    Field mapping and historical test records
+scripts/package.sh       Universal packaging script
+.github/workflows/       Manual packaging workflow
 ```
 
-### 发布状态
+### Release Status
 
-根据 [2026-10-06 的测试记录](docs/TEST_RESULTS.md)，已完成通用 Release 构建、26 项单元测试、安装包完整性及 ad-hoc 签名检查。界面交互、实际显示器插拔、睡眠唤醒和登录启动仍待验收，Intel Mac 与 macOS 13 尚未完成实机验证。
+According to the [test records from October 6, 2026](docs/TEST_RESULTS.md), the universal Release build, 26 unit tests, package integrity checks, and ad-hoc signature checks have been completed. UI interactions, physical display connections and disconnections, sleep and wake, and launch at login still require acceptance checks. Validation on Intel Macs and macOS 13 has not yet been completed.
 
 <details>
-<summary>发布前硬件与界面验收清单</summary>
+<summary>Hardware and UI acceptance checklist before release</summary>
 
-以下项目尚未完成，切换计时以显示器正常完成枚举为前提。
+The following items are pending. Switching time is measured after the display has been successfully enumerated.
 
-| 编号 | 场景 | 预期 |
+| ID | Scenario | Expected result |
 | --- | --- | --- |
-| A01 | 公司显示器设为右侧，从其他方向插入 | 正常枚举后约 3 秒内切换到右侧 |
-| A02 | 家里显示器设为左侧，从其他方向插入 | 正常枚举后约 3 秒内切换到左侧 |
-| A03 | 从公司显示器切换到家里显示器 | 不重启应用即可应用新规则 |
-| A04 | 分别配置无外接显示器时的四种行为，再断开显示器 | 按对应设置处理 |
-| A05 | 单独连接未配置的显示器 | 保持 Dock 位置并提示添加规则 |
-| A06 | Dock 已在目标位置时触发显示器事件 | 无需重载 Dock |
-| A07 | 连续切换配置或快速插拔 | 合并事件，处理最终有效状态 |
-| A08 | 创建规则后退出应用、重启应用及 Mac | 规则和设置保持 |
-| A09 | 安装并批准登录启动，重新登录 | 自动启动并匹配规则 |
-| A10 | 新增、编辑、禁用及删除规则 | 界面状态与存储一致，关闭窗口不退出 |
+| A01 | Connect the office display configured for Right while the Dock is elsewhere | Switch to the right within about 3 seconds after successful enumeration |
+| A02 | Connect the home display configured for Left while the Dock is elsewhere | Switch to the left within about 3 seconds after successful enumeration |
+| A03 | Switch from the office display to the home display | Apply the new rule without restarting the app |
+| A04 | Configure each of the four behaviors for no external display, then disconnect | Follow the corresponding setting |
+| A05 | Connect only an unconfigured display | Keep the Dock position and prompt to add a rule |
+| A06 | Trigger a display event while the Dock is already at the target position | No Dock reload required |
+| A07 | Change configurations repeatedly or connect and disconnect rapidly | Coalesce events and handle the final valid state |
+| A08 | Create a rule, then quit and restart the app and Mac | Preserve rules and settings |
+| A09 | Install and approve launch at login, then log in again | Launch automatically and match rules |
+| A10 | Add, edit, disable, and delete rules | Keep UI state and storage consistent; closing the window does not quit the app |
 
-额外场景：睡眠唤醒、开合盖、扩展与镜像切换、同型号显示器、USB-C Hub、DisplayLink、更换端口、优先级冲突、手动切换、关闭监听、执行失败及数据恢复。
+Additional scenarios: sleep and wake, closing and opening the laptop lid, switching between extended and mirrored displays, identical display models, USB-C hubs, DisplayLink, port changes, priority conflicts, manual switching, disabled monitoring, operation failures, and data recovery.
 
 </details>
 
-## 反馈与贡献
+## Feedback and Contributions
 
-欢迎通过本仓库的 **Issues** 报告问题或提出建议，也欢迎提交 **Pull Request**。
+Report bugs or suggest improvements through this repository's [**Issues**](https://github.com/ljt990218/AutoDock/issues). Contributions via [**Pull Requests**](https://github.com/ljt990218/AutoDock/pulls) are also welcome.
 
-报告问题时，请附上 macOS 版本、Mac 芯片类型、显示器型号与连接方式、复现步骤，以及预期和实际行为。如需提供诊断信息，请先移除序列号、UUID 和个人备注。
+When reporting an issue, include your macOS version, Mac chip type, display model and connection type, steps to reproduce, and the expected and actual behavior. Remove serial numbers, UUIDs, and personal names before sharing diagnostic information.
 
-## 许可证
+## License
 
-本项目采用 [MIT 许可证](LICENSE)。
+This project is licensed under the [MIT License](LICENSE).
